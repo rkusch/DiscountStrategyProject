@@ -10,6 +10,17 @@ package discountstrategyproject;
  * @author rkusch
  */
 public class Startup {
-    PosRegister register = new PosRegister();
+    
+    public static void main(String[] args) {
+         PosRegister register = new PosRegister();
+        Database data = new InMemoryDatabase();
+        //test
+        System.out.println(data.findProduct("A101"));
+        System.out.println(data.findProduct("B205"));
+        
+        
+    }
+   
+    
     
 }

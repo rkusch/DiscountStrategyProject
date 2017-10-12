@@ -10,31 +10,60 @@ package discountstrategyproject;
  * @author rkusch
  */
 public class PosRegister {
-    private double currentTransactionID;
+
+    private Integer currentTransactionID;
     //using this to store the last transaction ID in memory
-    private double lastTransactionID;
+    private Integer lastTransactionID;
     private Product product;
     private Customer customer;
     private TransactionOutput reciept;
     private TransactionOutput videoDisplay;
-    
-    public final void startSale(){
-        
-    };
-    public final void addItemToSale(){
-        
-    };
-    public final void endSale(){
-        
-    };
+    private Database database;
 
-    public double getCurrentTransactionID() {
+    // is this needed because of the constructor?
+    public final void startSale(Database database) {
+        
+    }
+
+    ;
+    
+    public final void addItemToSale(String productIdFromProductInBag,double qtyOfProductInBag) {
+        database.findProduct(productIdFromProductInBag);
+    }
+
+    ;
+    public final void endSale() {
+
+    }
+
+    ;
+
+    public Integer getCurrentTransactionID() {
         return currentTransactionID;
     }
 
     public void setCurrentTransactionID() {
-        if (lastTransactionID == null)
+        setLastTransactionID();
+        this.currentTransactionID = (getLastTransactionID() + 1);
+        this.lastTransactionID = getCurrentTransactionID();
+
     }
-    
-    
+
+    public Integer getLastTransactionID() {
+        return lastTransactionID;
+    }
+
+    public void setLastTransactionID() {
+        if (lastTransactionID == null) {
+            lastTransactionID = 0;
+
+        }
+
+    }
+
+    public PosRegister() {
+        Database database = new InMemoryDatabase();
+        setLastTransactionID();
+        setCurrentTransactionID();
+    }
 }
