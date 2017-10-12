@@ -10,21 +10,36 @@ package discountstrategyproject;
  * @author rkusch
  */
 public class NoDiscount implements Discount {
+    private double discountAmt;
 
     @Override
-    public double setDiscountID() {
+    public final double setDiscountID() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public double getDiscountID() {
+    public final double getDiscountID() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public double getDiscountAmount() {
+    public final double getDiscountAmount() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public final double getDiscountAmt() {
+        return discountAmt;
+    }
+
+    public final void setDiscountAmt(double discountAmt) {
+        this.discountAmt = discountAmt;
+    }
+
+    
+    public NoDiscount() {
+        setDiscountAmt(0);
+    }
+    
     
     
 }

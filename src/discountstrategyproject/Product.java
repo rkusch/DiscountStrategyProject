@@ -10,60 +10,58 @@ package discountstrategyproject;
  * @author rkusch
  */
 public class Product {
-    private double productID;
+    private String productID;
     private String productName;
     private String productDescription;
     private double productUnitPrice;
-    
-    
     private Discount discount;
 
-    public double getProductID() {
+
+    public final String getProductID() {
         return productID;
     }
 
-    public void setProductID(double productID) {
+    public final void setProductID(String productID) {
         this.productID = productID;
     }
 
-    public String getProductName() {
+    public final String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
+    public final void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public String getProductDescription() {
+    public final String getProductDescription() {
         return productDescription;
     }
 
-    public void setProductDescription(String productDescription) {
+    public final void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
     }
 
-    public double getProductUnitPrice() {
+    public final double getProductUnitPrice() {
         return productUnitPrice;
     }
 
-    public void setProductUnitPrice(double productUnitPrice) {
+    public final void setProductUnitPrice(double productUnitPrice) {
         this.productUnitPrice = productUnitPrice;
     }
 
-    public Discount getDiscount() {
+    public final Discount getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Discount discount) {
+    public final void setDiscount(Discount discount) {
         this.discount = discount;
     }
 
-    public Product(double productID, String productName, String productDescription, double productUnitPrice, Discount discount) {
-        this.productID = productID;
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.productUnitPrice = productUnitPrice;
-        this.discount = discount;
+    public Product(String productID, String productName, double productUnitPrice, Discount discount) {
+        setProductID(productID);
+        setProductName(productName);
+        setProductUnitPrice(productUnitPrice);
+        setDiscount(discount);
     }
     
     
