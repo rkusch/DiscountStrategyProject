@@ -5,11 +5,13 @@
  */
 package discountstrategyproject;
 
+import java.lang.reflect.Array;
+
 /**
  *
  * @author rkusch
  */
-public interface SaleOutput {
+public interface TransactionOutput {
     public abstract Array setLineTotalOuput();
     public abstract void getLineTotalOutput();
     

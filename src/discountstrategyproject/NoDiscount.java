@@ -13,18 +13,8 @@ public class NoDiscount implements Discount {
     private double discountAmt;
 
     @Override
-    public final double setDiscountID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public final double getDiscountID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public final double getDiscountAmount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public final double getDiscountAmount(double qty, Product product) {
+        return getDiscountAmt();
     }
 
     public final double getDiscountAmt() {
@@ -32,7 +22,7 @@ public class NoDiscount implements Discount {
     }
 
     public final void setDiscountAmt(double discountAmt) {
-        this.discountAmt = discountAmt;
+        this.discountAmt = 0;
     }
 
     

@@ -9,6 +9,8 @@ package discountstrategyproject;
  *
  * @author rkusch
  */
-public class RecieptSaleOutput implements SaleOutput {
+public interface Database {
     
+    public abstract Customer findCustomer(String customerID);
+    public abstract Product findProduct(String productID);
 }

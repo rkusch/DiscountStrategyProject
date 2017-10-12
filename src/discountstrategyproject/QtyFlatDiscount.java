@@ -11,19 +11,44 @@ package discountstrategyproject;
  */
 public class QtyFlatDiscount implements Discount {
 
-    @Override
-    public double setDiscountID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private double discountTotalOff;
+    private double quantityNeededToGetDiscount;
+    
 
     @Override
-    public double getDiscountID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public final double getDiscountAmount(double qty, Product product) {
+        double totalDollarAmtOff = 0;
+        if (qty >= getQuantityNeededToGetDiscount()) {
+          totalDollarAmtOff = getDiscountTotalOff();  
+        }
+        return totalDollarAmtOff;
     }
 
-    @Override
-    public double getDiscountAmount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public final double getDiscountTotalOff() {
+        return discountTotalOff;
+    }
+
+    public final void setDiscountTotalOff(double discountTotalOff) {
+        if (discountTotalOff <= 0) {
+            throw new IllegalArgumentException("Invalid Discount Total Off");
+        }
+        this.discountTotalOff = discountTotalOff;
+    }
+
+    public final double getQuantityNeededToGetDiscount() {
+        return quantityNeededToGetDiscount;
+    }
+
+    public final void setQuantityNeededToGetDiscount(double quantityNeededToGetDiscount) {
+         if (quantityNeededToGetDiscount <= 0) {
+            throw new IllegalArgumentException("Invalid Discount Quantity");
+        }
+        this.quantityNeededToGetDiscount = quantityNeededToGetDiscount;
     }
     
+
+    public QtyFlatDiscount(double discountTotalOff) {
+        setDiscountTotalOff(discountTotalOff);
+    }
+
 }

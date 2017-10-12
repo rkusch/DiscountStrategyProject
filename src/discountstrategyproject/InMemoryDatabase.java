@@ -11,7 +11,7 @@ package discountstrategyproject;
  * @author  Jim Lombardo
  * @version 1.00
  */
-public class InMemoryDataAccess {
+public class InMemoryDatabase implements Database{
     private Customer[] customers = {
         new Customer("100", "John Smith"),
         new Customer("200", "Sally Jones"),
@@ -48,7 +48,7 @@ public class InMemoryDataAccess {
         
         Customer customer = null;
         for(Customer c : customers) {
-            if(custId.equals(c.getCustId())) {
+            if(custId.equals(c.getCustomerID())) {
                 customer = c;
                 break;
             }
@@ -73,7 +73,7 @@ public class InMemoryDataAccess {
         
         Product product = null;
         for(Product p : products) {
-            if(prodId.equals(p.getProdId())) {
+            if(prodId.equals(p.getProductID())) {
                 product = p;
                 break;
             }

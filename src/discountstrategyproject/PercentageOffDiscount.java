@@ -9,7 +9,8 @@ package discountstrategyproject;
  *
  * @author rkusch
  */
-public class PercentageOffDiscount implements Discount{
+public class PercentageOffDiscount implements Discount {
+
     private double percentageOff;
 
     public final double getPercentageOff() {
@@ -17,29 +18,18 @@ public class PercentageOffDiscount implements Discount{
     }
 
     public final void setPercentageOff(double percentageOff) {
-        this.percentageOff = percentageOff;
-    }
-    
-    @Override
-    public final double setDiscountID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (percentageOff <= 0) {
+            throw new IllegalArgumentException("Invalid Percent Off");
+        }
     }
 
     @Override
-    public final double getDiscountID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public final double getDiscountAmount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public final double getDiscountAmount(double qty, Product product) {
+        return (product.getProductUnitPrice() * getPercentageOff());
     }
 
     public PercentageOffDiscount(double percentageOff) {
         setPercentageOff(percentageOff);
     }
 
-  
-    
-    
 }

@@ -10,20 +10,29 @@ package discountstrategyproject;
  * @author rkusch
  */
 public class FlatDiscount implements Discount {
+    
+    private double discountTotalOff;
 
-    @Override
-    public double setDiscountID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public final double getDiscountTotalOff() {
+        return discountTotalOff;
+    }
+
+    public final void setDiscountTotalOff(double discountTotalOff) {
+        if (discountTotalOff <= 0) {
+            throw new IllegalArgumentException("Invalid Discount Amount");
+        }
     }
 
     @Override
-    public double getDiscountID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public final double getDiscountAmount(double qty, Product product) {
+        return getDiscountTotalOff();
     }
 
-    @Override
-    public double getDiscountAmount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public FlatDiscount(double discountTotalOff) {
+        setDiscountTotalOff(discountTotalOff);
+
     }
+    
+    
     
 }

@@ -10,8 +10,6 @@ package discountstrategyproject;
  * @author rkusch
  */
 public interface Discount {
-    public abstract double setDiscountID();
-    public abstract double getDiscountID();
-    public abstract double getDiscountAmount();
+    public abstract double getDiscountAmount(double qty, Product product);
     
 }
