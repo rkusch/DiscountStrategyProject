@@ -12,7 +12,5 @@ import java.lang.reflect.Array;
  * @author rkusch
  */
 public interface TransactionOutput {
-    public abstract Array setLineTotalOuput();
-    public abstract void getLineTotalOutput();
-    
+    public abstract void outputEntireTransaction(LineTotal allItemsOnTransaction);
 }

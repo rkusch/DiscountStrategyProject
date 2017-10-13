@@ -5,6 +5,8 @@
  */
 package discountstrategyproject;
 
+import java.util.Arrays;
+
 /**
  *
  * @author rkusch
@@ -16,24 +18,34 @@ public class PosRegister {
     private Integer lastTransactionID;
     private Product product;
     private Customer customer;
-    private TransactionOutput reciept;
-    private TransactionOutput videoDisplay;
+    private TransactionOutput receipt, videoDisplay;
     private Database database;
+    private LineTotal allItemsOnTransaction;
 
-    // is this needed because of the constructor?
-    public final void startSale(Database database) {
-        
+    //create a transactionID and generate Tranaction Output
+    public final void startSale() {
+        setCurrentTransactionID();
+        allItemsOnTransaction = new LineTotal();
+        receipt = new TransactionOuputToReceipt();
+        videoDisplay = new TransactionOuputToDisplay();
+
     }
 
     ;
     
-    public final void addItemToSale(String productIdFromProductInBag,double qtyOfProductInBag) {
-        database.findProduct(productIdFromProductInBag);
+    public final void addItemToSale(String productIdFromProductInBag, int qtyOfProductInBag) {
+
+        if (database.findProduct(productIdFromProductInBag) == null) {
+            throw new IllegalArgumentException("Product Not In Database");
+        }
+
+        allItemsOnTransaction.setLineTotal(database.findProduct(productIdFromProductInBag), qtyOfProductInBag);
+
     }
 
     ;
     public final void endSale() {
-
+                receipt.outputEntireTransaction(allItemsOnTransaction);
     }
 
     ;
@@ -42,18 +54,20 @@ public class PosRegister {
         return currentTransactionID;
     }
 
-    public void setCurrentTransactionID() {
+    //set to private becuase this shouldn't be modified by anyone - TransactionID is autogenerating
+    private final void setCurrentTransactionID() {
         setLastTransactionID();
         this.currentTransactionID = (getLastTransactionID() + 1);
         this.lastTransactionID = getCurrentTransactionID();
 
     }
 
-    public Integer getLastTransactionID() {
+    public final Integer getLastTransactionID() {
         return lastTransactionID;
     }
 
-    public void setLastTransactionID() {
+    //set to private becuase this shouldn't be modified by anyone - LastTransactionID is autogenerating
+    private final void setLastTransactionID() {
         if (lastTransactionID == null) {
             lastTransactionID = 0;
 
@@ -61,9 +75,8 @@ public class PosRegister {
 
     }
 
-    public PosRegister() {
-        Database database = new InMemoryDatabase();
-        setLastTransactionID();
-        setCurrentTransactionID();
+    public PosRegister(Database database) {
+        this.database = database;
+
     }
 }

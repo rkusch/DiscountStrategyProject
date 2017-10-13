@@ -4,19 +4,17 @@
  * and open the template in the editor.
  */
 package discountstrategyproject;
-
-import java.lang.reflect.Array;
+import java.util.Arrays;
 
 /**
  *
  * @author rkusch
  */
-public class TransactionOuputToDisplay implements TransactionOutput {
-
+public class TransactionOuputToReceipt implements TransactionOutput {
 
     @Override
     public void outputEntireTransaction(LineTotal allItemsOnTransaction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(Arrays.toString(allItemsOnTransaction.getLineTotal()));
     }
 
 

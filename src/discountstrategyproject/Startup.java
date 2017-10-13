@@ -12,11 +12,17 @@ package discountstrategyproject;
 public class Startup {
     
     public static void main(String[] args) {
-         PosRegister register = new PosRegister();
-        Database data = new InMemoryDatabase();
-        //test
-        System.out.println(data.findProduct("A101"));
-        System.out.println(data.findProduct("B205"));
+        PosRegister register = new PosRegister(new InMemoryDatabase());
+        register.startSale();
+        register.addItemToSale("A101", 1);
+//        register.addItemToSale("A101", 1);
+        register.endSale();
+        
+                            //test
+        //System.out.println(data.findProduct("A101"));
+        //System.out.println(data.findProduct("B205"));
+        //
+        
         
         
     }
