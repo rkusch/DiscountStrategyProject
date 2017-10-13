@@ -14,7 +14,7 @@ public class TransactionOuputToReceipt implements TransactionOutput {
 
     @Override
     public void outputEntireTransaction(LineTotal allItemsOnTransaction) {
-        System.out.println(Arrays.toString(allItemsOnTransaction.getLineTotal()));
+        System.out.println(Arrays.deepToString(allItemsOnTransaction.getLineTotal()));
     }
 
 

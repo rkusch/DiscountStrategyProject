@@ -14,8 +14,13 @@ public class Startup {
     public static void main(String[] args) {
         PosRegister register = new PosRegister(new InMemoryDatabase());
         register.startSale();
-        register.addItemToSale("A101", 1);
 //        register.addItemToSale("A101", 1);
+        register.addItemToSale("A101", 1);
+        register.addItemToSale("B205", 1);
+        register.addItemToSale("C222", 1);
+        register.addItemToSale("A101", 1);
+        register.addItemToSale("B205", 1);
+        register.addItemToSale("C222", 1);
         register.endSale();
         
                             //test
