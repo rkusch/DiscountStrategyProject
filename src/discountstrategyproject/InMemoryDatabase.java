@@ -32,6 +32,11 @@ public class InMemoryDatabase implements Database{
         new Product("C222", "Women's Socks    ", 9.50, new NoDiscount())
     };
     
+    // I could have made another class and stored this array here - However I thought this would be the best place
+    private final String[] productHeader = {
+        "Product ID", "Product Name", "Unit Price", "Discount"
+    };
+    
     /**
      * Tries to find a Customer by customer id.
      * @param custId - must not be null or empty

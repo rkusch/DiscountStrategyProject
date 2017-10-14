@@ -38,6 +38,9 @@ public class PosRegister {
         if (database.findProduct(productIdFromProductInBag) == null) {
             throw new IllegalArgumentException("Product Not In Database");
         }
+        if (qtyOfProductInBag <=0) {
+            throw new IllegalArgumentException("Please Enter a Valid Quantity");
+        }
 
         allItemsOnTransaction.setLineTotal(database.findProduct(productIdFromProductInBag), qtyOfProductInBag);
 
@@ -50,7 +53,7 @@ public class PosRegister {
 
     ;
 
-    public Integer getCurrentTransactionID() {
+    public final Integer getCurrentTransactionID() {
         return currentTransactionID;
     }
 

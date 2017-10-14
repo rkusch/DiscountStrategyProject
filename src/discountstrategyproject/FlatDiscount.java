@@ -21,6 +21,7 @@ public class FlatDiscount implements Discount {
         if (discountTotalOff <= 0) {
             throw new IllegalArgumentException("Invalid Discount Amount");
         }
+        this.discountTotalOff = discountTotalOff;
     }
 
     @Override

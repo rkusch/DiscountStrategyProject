@@ -21,6 +21,7 @@ public class PercentageOffDiscount implements Discount {
         if (percentageOff <= 0) {
             throw new IllegalArgumentException("Invalid Percent Off");
         }
+        this.percentageOff = percentageOff;
     }
 
     @Override

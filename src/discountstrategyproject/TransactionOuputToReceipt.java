@@ -21,11 +21,11 @@ public class TransactionOuputToReceipt implements TransactionOutput {
         System.out.println();
         System.out.println();
         System.out.println("-----------------------------------------");
-        System.out.println("Product\t\t\tPrice\tQty");
-        System.out.println("------\t\t\t-----\t---");
+        System.out.println("Product\t\t\t\tPrice\t\tDiscount\tQty\t\tTotal Price");
+        System.out.println("-------\t\t\t\t-----\t\t--------\t---\t\t-----------");
         for (int oneLineTotal = 0; oneLineTotal <allItemsOnTransaction.getLineTotal().length; oneLineTotal++ ) {
             for (int oneColumnInLineTotal = 0; oneColumnInLineTotal < allItemsOnTransaction.getNUMBER_OF_COLUMNS_PER_LINE(); oneColumnInLineTotal++) {
-                System.out.print(allItemsOnTransaction.getLineTotal()[oneLineTotal][oneColumnInLineTotal] + "\t"); 
+                System.out.print(allItemsOnTransaction.getLineTotal()[oneLineTotal][oneColumnInLineTotal] + "\t\t"); 
             }
             System.out.print("\n");
      
