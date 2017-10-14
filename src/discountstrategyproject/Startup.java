@@ -16,11 +16,8 @@ public class Startup {
         register.startSale();
 //        register.addItemToSale("A101", 1);
         register.addItemToSale("A101", 1);
-        register.addItemToSale("B205", 1);
-        register.addItemToSale("C222", 1);
+        register.addItemToSale("B205", 2);
         register.addItemToSale("A101", 1);
-        register.addItemToSale("B205", 1);
-        register.addItemToSale("C222", 1);
         register.endSale();
         
                             //test

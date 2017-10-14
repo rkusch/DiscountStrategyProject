@@ -13,7 +13,13 @@ package discountstrategyproject;
 public class LineTotal {
 
     private String[][] lineTotal;
-    private static final int NUMBER_OF_COLUMNS_PER_LINE = 3;
+    private final int NUMBER_OF_COLUMNS_PER_LINE = 3;
+
+    public final int getNUMBER_OF_COLUMNS_PER_LINE() {
+        return NUMBER_OF_COLUMNS_PER_LINE;
+    }
+    
+    
 
     public final String[][] getLineTotal() {
         return lineTotal;
