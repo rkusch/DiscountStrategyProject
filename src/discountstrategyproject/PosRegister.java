@@ -16,6 +16,7 @@ public class PosRegister {
     private Integer currentTransactionID;
     //using this to store the last transaction ID in memory
     private Integer lastTransactionID;
+    private final String STORENAME = "Kohl's";
     private Product product;
     private Customer customer;
     private TransactionOutput receipt, videoDisplay;
@@ -26,8 +27,8 @@ public class PosRegister {
     public final void startSale(String customerID) {
         setCurrentTransactionID();
         setCustomer(database.findCustomer(customerID));
-        itemsInTransaction = new TransactionDataService(getCustomer(), getCurrentTransactionID());
-        receipt = new TransactionOuputToReceipt();
+        itemsInTransaction = new TransactionDataService(getCustomer(), getCurrentTransactionID(), STORENAME);
+        receipt = new TransactionOuputToReceipt(itemsInTransaction);
         videoDisplay = new TransactionOuputToDisplay();
 
     }
@@ -53,10 +54,7 @@ public class PosRegister {
     ;
     public final void endSale() {
         receipt.outputEntireTransaction(itemsInTransaction);
-        //code below is used to view array - just testing
-        System.out.println("########################################");
-        System.out.println("Array is below");
-        System.out.println(Arrays.deepToString(itemsInTransaction.getAllItemsInTransaction()));
+
     }
 
     ;

@@ -90,10 +90,12 @@ public class LineTotal {
 
     public void setLineTotalHeaders() {
 
-        lineTotalHeaders = new String[]{"Product Name",
+        lineTotalHeaders = new String[]{
+            "Product Name",
             "Price",
             "Discount",
             "Qty",
+            "Sale Price",
             "Total Price"
 
         };
@@ -109,11 +111,9 @@ public class LineTotal {
         lineTotal[1] = formatter.format(product.getProductUnitPrice());
         lineTotal[2] = formatter.format(product.getDiscount().getDiscountAmount(qty, product));
         lineTotal[3] = Integer.toString(qty);
-        if (qty > 1) {
-            lineTotal[4] = formatter.format((product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product)) * qty) + " (" + qty + " @ " + (formatter.format(product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product))) + ")";
-        } else {
-            lineTotal[4] = formatter.format((product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product)) * qty);
-        }
+        lineTotal[4] = formatter.format(product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product));
+        lineTotal[5] = formatter.format((product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product)) * qty);
+   
         
 
     }
