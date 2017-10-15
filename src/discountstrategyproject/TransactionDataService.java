@@ -22,15 +22,19 @@ public class TransactionDataService {
     private double total;
     private double totalDollarsSaved;
 
-    public String getStoreName() {
+    public final String getStoreName() {
         return storeName;
     }
 
-    public void setStoreName(String storeName) {
-        if (storeName.isEmpty()) {
+    public final void setStoreName(String storeName) {
+        if (storeName.length() == 0 || storeName == null) {
             throw new IllegalArgumentException("Please enter a valid store name");
         }
         this.storeName = storeName;
+    }
+
+    public final LineTotal getOneLineTotal() {
+        return oneLineTotal;
     }
 
     public final void setOneLineTotal(Product product, int qty) {
@@ -48,11 +52,7 @@ public class TransactionDataService {
 
     }
 
-    public LineTotal getOneLineTotal() {
-        return oneLineTotal;
-    }
-
-    public Customer getCustomer() {
+    public final Customer getCustomer() {
         return customer;
     }
 
@@ -74,23 +74,11 @@ public class TransactionDataService {
         this.transactionID = transactionID;
     }
 
-    public TransactionDataService(Customer customer, Integer transactionID, String storeName) {
-        oneLineTotal = new LineTotal();
-        setCustomer(customer);
-        setTransactionID(transactionID);
-        setStoreName(storeName);
-    }
-//testing this below
-
-    public String[] getLineHeaderInfo() {
-        return oneLineTotal.getLineTotalHeaders();
-    }
-
-    public String[][] getAllItemsInTransaction() {
+    public final String[][] getAllItemsInTransaction() {
         return allItemsInTransaction;
     }
 
-    public void setAllItemsInTransaction(LineTotal oneLineTotal) {
+    public final void setAllItemsInTransaction(LineTotal oneLineTotal) {
         // if no items were added to transaction yet, create a two dimensional array
         if (allItemsInTransaction == null) {
             allItemsInTransaction = new String[1][oneLineTotal.getLineTotalHeaders().length];
@@ -144,13 +132,24 @@ public class TransactionDataService {
         this.total = total;
     }
 
-    public double getTotalDollarsSaved() {
+    public final double getTotalDollarsSaved() {
         DecimalFormat df = new DecimalFormat("#.00");
         return Double.parseDouble(df.format(totalDollarsSaved));
     }
 
-    public void setTotalDollarsSaved() {
+    public final void setTotalDollarsSaved() {
         this.totalDollarsSaved = getSubtotal() - getTotal();
     }
 
+    public String[] getLineHeaderInfo() {
+        return oneLineTotal.getLineTotalHeaders();
+    }
+
+    public TransactionDataService(PosRegister pos) {
+        oneLineTotal = new LineTotal();
+        setCustomer(pos.getCustomer());
+        setTransactionID(pos.getCurrentTransactionID());
+        setStoreName(pos.getSTORENAME());
+        setCustomer(pos.getCustomer());
+    }
 }
