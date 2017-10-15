@@ -15,7 +15,7 @@ public class TransactionOuputToDisplay implements TransactionOutput {
 
 
     @Override
-    public void outputEntireTransaction(LineTotal allItemsOnTransaction) {
+    public void outputEntireTransaction(TransactionDataService transactionData) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

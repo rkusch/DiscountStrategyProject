@@ -43,7 +43,7 @@ public class PosRegister {
         if (currentProductInBag == null) {
             throw new IllegalArgumentException("Product Not In Database");
         } else {
-            itemsInTransaction.setAllLineTotalsInTransaction(currentProductInBag, qtyOfProductInBag);
+            itemsInTransaction.setOneLineTotal(currentProductInBag, qtyOfProductInBag);
         }
 
         
@@ -52,7 +52,11 @@ public class PosRegister {
 
     ;
     public final void endSale() {
-        receipt.outputEntireTransaction(itemsInTransaction.getAllLineTotalsInTransaction());
+        receipt.outputEntireTransaction(itemsInTransaction);
+        //code below is used to view array - just testing
+        System.out.println("########################################");
+        System.out.println("Array is below");
+        System.out.println(Arrays.deepToString(itemsInTransaction.getAllItemsInTransaction()));
     }
 
     ;

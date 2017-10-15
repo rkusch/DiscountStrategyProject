@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class TransactionOuputToReceipt implements TransactionOutput {
 
     @Override
-    public void outputEntireTransaction(LineTotal allItemsOnTransaction) {
+    public void outputEntireTransaction(TransactionDataService transactionData) {
         
         //this works to output all itemms to one multidimensional array
         //System.out.println(Arrays.deepToString(allItemsOnTransaction.getLineTotal()));
@@ -23,16 +23,17 @@ public class TransactionOuputToReceipt implements TransactionOutput {
         System.out.println("-----------------------------------------");
         System.out.println("Product\t\t\t\tPrice\t\tDiscount\tQty\t\tTotal Price");
         System.out.println("-------\t\t\t\t-----\t\t--------\t---\t\t-----------");
-        for (int oneLineTotal = 0; oneLineTotal <allItemsOnTransaction.getLineTotal().length; oneLineTotal++ ) {
-            for (int oneColumnInLineTotal = 0; oneColumnInLineTotal < allItemsOnTransaction.getNUMBER_OF_COLUMNS_PER_LINE(); oneColumnInLineTotal++) {
-                System.out.print(allItemsOnTransaction.getLineTotal()[oneLineTotal][oneColumnInLineTotal] + "\t\t"); 
-            }
-            System.out.print("\n");
-     
-        }
-//        System.out.println("");
-//        
-//        System.out.println(Arrays.deepToString(allItemsOnTransaction.getLineTotal()));
+//        for (int oneLineTotal = 0; oneLineTotal <allItemsOnTransaction.getLineTotal().length; oneLineTotal++ ) {
+//            for (int oneColumnInLineTotal = 0; oneColumnInLineTotal < 5; oneColumnInLineTotal++) {
+//                System.out.print(allItemsOnTransaction.getLineTotal()[oneLineTotal][oneColumnInLineTotal] + "\t\t"); 
+//            }
+//            System.out.print("\n");
+//     
+//        }
+//          Code above works - starting test below
+        
+
+
     }
 
 
