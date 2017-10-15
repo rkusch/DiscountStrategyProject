@@ -19,6 +19,24 @@ public class Startup {
         register.addItemToSale("B205", 4);
         register.addItemToSale("A101", 1);
         register.endSale();
+        register.startSale("200");
+//        register.addItemToSale("A101", 1);
+        register.addItemToSale("A101", 3);
+        register.addItemToSale("B205", 4);
+        register.addItemToSale("A101", 1);
+        register.endSale();
+        register.startSale("100");
+//        register.addItemToSale("A101", 1);
+        register.addItemToSale("A101", 3);
+        register.addItemToSale("B205", 4);
+        register.addItemToSale("A101", 1);
+        register.endSale();
+        register.startSale("300");
+//        register.addItemToSale("A101", 1);
+        register.addItemToSale("A101", 3);
+        register.addItemToSale("B205", 4);
+        register.addItemToSale("A101", 1);
+        register.endSale();
 
         //test
         //System.out.println(data.findProduct("A101"));
