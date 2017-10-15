@@ -20,12 +20,13 @@ public class PosRegister {
     private Customer customer;
     private TransactionOutput receipt, videoDisplay;
     private Database database;
-    private LineTotal allItemsOnTransaction;
+    private TransactionDataService itemsInTransaction;
 
     //create a transactionID and generate Tranaction Output
-    public final void startSale() {
+    public final void startSale(String customerID) {
         setCurrentTransactionID();
-        allItemsOnTransaction = new LineTotal();
+        setCustomer(database.findCustomer(customerID));
+        itemsInTransaction = new TransactionDataService(getCustomer(), getCurrentTransactionID());
         receipt = new TransactionOuputToReceipt();
         videoDisplay = new TransactionOuputToDisplay();
 
@@ -33,22 +34,25 @@ public class PosRegister {
 
     ;
     
-    public final void addItemToSale(String productIdFromProductInBag, int qtyOfProductInBag) {
+    public final void addItemToSale(String productIDFromProductInBag, int qtyOfProductInBag) {
+        Product currentProductInBag = database.findProduct(productIDFromProductInBag);
 
-        if (database.findProduct(productIdFromProductInBag) == null) {
-            throw new IllegalArgumentException("Product Not In Database");
-        }
-        if (qtyOfProductInBag <=0) {
+        if (qtyOfProductInBag <= 0) {
             throw new IllegalArgumentException("Please Enter a Valid Quantity");
         }
+        if (currentProductInBag == null) {
+            throw new IllegalArgumentException("Product Not In Database");
+        } else {
+            itemsInTransaction.setAllLineTotalsInTransaction(currentProductInBag, qtyOfProductInBag);
+        }
 
-        allItemsOnTransaction.setLineTotal(database.findProduct(productIdFromProductInBag), qtyOfProductInBag);
+        
 
     }
 
     ;
     public final void endSale() {
-                receipt.outputEntireTransaction(allItemsOnTransaction);
+        receipt.outputEntireTransaction(itemsInTransaction.getAllLineTotalsInTransaction());
     }
 
     ;
@@ -78,8 +82,31 @@ public class PosRegister {
 
     }
 
+    public final Customer getCustomer() {
+        return customer;
+    }
+
+    public final void setCustomer(Customer customer) {
+        if (customer == null) {
+            throw new IllegalArgumentException("Please enter a customer");
+        }
+        this.customer = customer;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        if (database == null) {
+            throw new IllegalArgumentException("Please enter a valid database");
+        }
+        this.database = database;
+    }
+
     public PosRegister(Database database) {
         this.database = database;
 
     }
+
 }

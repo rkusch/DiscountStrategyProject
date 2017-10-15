@@ -53,8 +53,8 @@ public class LineTotal {
             
             for (int ie = oldLineTotal.length; ie < oldLineTotal.length + 1; ie++) {
                 lineTotal[ie][0] = product.getProductName();
-                lineTotal[ie][1] = Double.toString(product.getProductUnitPrice());
-                lineTotal[ie][2] = Double.toString(( (double)Math.round(product.getDiscount().getDiscountAmount(qty, product) * 100d) / 100d) );
+                lineTotal[ie][1] = formatter.format(product.getProductUnitPrice());
+                lineTotal[ie][2] = formatter.format((double)Math.round(product.getDiscount().getDiscountAmount(qty, product)));
                 lineTotal[ie][3] = Integer.toString(qty);
             if (qty >1) {
                 lineTotal[ie][4] = formatter.format((double)Math.round((product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product)) * qty)) + " (" + qty + " @ " + (formatter.format(product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product))) + ")";

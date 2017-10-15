@@ -46,9 +46,8 @@ public class InMemoryDatabase implements Database{
     public final Customer findCustomer(final String custId) {
         // validation is needed for method parameter
         if(custId == null || custId.length() == 0) {
-            System.out.println("Sorry, FakeDatabase.findCustomer method has "
-                    + "illegal argument");
-            return null;  // end method prematurely after log to console
+        throw new IllegalArgumentException("Please enter a valid cusotomer ID");
+        // end method prematurely after log to console
         }
         
         Customer customer = null;
