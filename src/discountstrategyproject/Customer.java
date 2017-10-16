@@ -19,6 +19,9 @@ public class Customer {
     }
 
     public final void setCustomerID(String customerID) {
+        if (customerID == null || customerID.length()==0) {
+            throw new IllegalArgumentException("Please enter a valid customer ID");
+        }
         this.customerID = customerID;
     }
 
