@@ -14,7 +14,7 @@ public class QtyPercentOffDiscount implements Discount {
     private double quantityNeededToGetDiscount;
 
     @Override
-    public double getDiscountAmount(double qty, Product product) {
+    public final double getDiscountAmount(double qty, Product product) {
         double totalDollarAmtOff = 0;
         if (qty >= getQuantityNeededToGetDiscount() ) {
             totalDollarAmtOff = (qty * product.getProductUnitPrice()) - (qty * getPercentOffDiscount());

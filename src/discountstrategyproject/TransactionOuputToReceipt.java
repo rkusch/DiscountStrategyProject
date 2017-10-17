@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 package discountstrategyproject;
-
-import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.Collections;
-
 /**
  *
  * @author rkusch
@@ -16,17 +11,17 @@ import java.util.Collections;
 public class TransactionOuputToReceipt implements TransactionOutput {
 
     private final String TABSPACING = "%-22s";
-    ;
     private TransactionDataService transactionData;
 
-    private final void outputFromOneDArrayBasedOnNumberOfHeaders(String[] string) {
+    //this is set to private because only this class should call this method
+    private final void outputFromOneDArrayBasedOnNumberOfHeaders() {
         for (int numberOfHeaders = 0; numberOfHeaders < transactionData.getLineHeaderInfo().length; numberOfHeaders++) {
-            System.out.printf(TABSPACING, string[numberOfHeaders]);
+            System.out.printf(TABSPACING, transactionData.getLineHeaderInfo()[numberOfHeaders]);
         }
         System.out.print("\n");
     }
-
-    private final void outputFromTwoDArrayBasedOnNumberOfHeaders(String[][] string) {
+    //this is set to private because only this class should call this method
+    private final void outputFromTwoDArrayBasedOnNumberOfHeaders() {
         for (int numberOfItemsInCart = 0; numberOfItemsInCart < transactionData.getAllItemsInTransaction().length; numberOfItemsInCart++) {
             for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < transactionData.getLineHeaderInfo().length; numberOfColumnsInLineTotal++) {
                 System.out.printf(TABSPACING, transactionData.getAllItemsInTransaction()[numberOfItemsInCart][numberOfColumnsInLineTotal]);
@@ -36,13 +31,12 @@ public class TransactionOuputToReceipt implements TransactionOutput {
     }
 
     @Override
-    public void outputEntireTransaction(TransactionDataService transactionData) {
-        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+    public final void outputEntireTransaction() {
         System.out.println("Welcome to " + transactionData.getStoreName());
         System.out.println("----------------------------------------------------------------------------------------------------------------------------");
-        outputFromOneDArrayBasedOnNumberOfHeaders(transactionData.getLineHeaderInfo());
+        outputFromOneDArrayBasedOnNumberOfHeaders();
         System.out.print("\n");
-        outputFromTwoDArrayBasedOnNumberOfHeaders(transactionData.getAllItemsInTransaction());
+        outputFromTwoDArrayBasedOnNumberOfHeaders();
         System.out.println("----------------------------------------------------------------------------------------------------------------------------");
         System.out.printf(TABSPACING, "Sub-total:");
         System.out.print("$" + transactionData.getSubtotal());
@@ -52,21 +46,29 @@ public class TransactionOuputToReceipt implements TransactionOutput {
         System.out.print("\n");
         System.out.println();
         System.out.println();
-        System.out.println("Thank you for shopping at " + transactionData.getStoreName() + ", " +transactionData.getCustomer().getCustomerFullName() +"!" );
-        System.out.println("You saved $" + transactionData.getTotalDollarsSaved() + "!" );
+        System.out.println("Thank you for shopping at " + transactionData.getStoreName() + ", " + transactionData.getCustomer().getCustomerFullName() + "!");
+        System.out.println("You saved $" + transactionData.getTotalDollarsSaved() + "!");
+        System.out.println();
+        System.out.println();
+        System.out.println("######################## Transaction ID: " + transactionData.getTransactionID() + " #########################################");
+        System.out.println();
+        System.out.println();
 
     }
 
-    public TransactionDataService getTransactionData() {
+    public final TransactionDataService getTransactionData() {
         return transactionData;
     }
 
-    public void setTransactionData(TransactionDataService transactionData) {
+    public final void setTransactionData(TransactionDataService transactionData) {
+        if (transactionData == null) {
+            throw new IllegalArgumentException("Please enter a valid transactionData object");
+        }
         this.transactionData = transactionData;
     }
 
     public TransactionOuputToReceipt(TransactionDataService transactionData) {
-        this.transactionData = transactionData;
+        setTransactionData(transactionData);
     }
 
 }

@@ -37,14 +37,15 @@ public class TransactionDataService {
         return oneLineTotal;
     }
 
-    public final void setOneLineTotal(Product product, int qty) {
-        if (product == null) {
-            throw new IllegalArgumentException("Please input a valid product object");
+    public final void setOneLineTotal(Product product, int qty, Database database) {
+        //is it nessecary to validate that the product exists in the database at every level?
+        if (database.findProduct(product.getProductID()) == null) {
+            throw new IllegalArgumentException("Please input a valid product");
         }
-        if (qty < 0) {
+        if (qty <= 0) {
             throw new IllegalArgumentException("Please input a valid quantity");
         }
-        oneLineTotal.setLineTotal(product, qty);
+        oneLineTotal.setLineTotal(product, qty, database);
         setAllItemsInTransaction(oneLineTotal);
         setTotal();
         setSubtotal();
@@ -56,11 +57,11 @@ public class TransactionDataService {
         return customer;
     }
 
-    public final void setCustomer(Customer customer) {
-        if (customer == null) {
+    public final void setCustomer(String customerID, Database database) {
+        if (database.findCustomer(customerID) == null) {
             throw new IllegalArgumentException("Please enter a valid customer");
         }
-        this.customer = customer;
+        this.customer = database.findCustomer(customerID);
     }
 
     public final Integer getTransactionID() {
@@ -79,6 +80,9 @@ public class TransactionDataService {
     }
 
     public final void setAllItemsInTransaction(LineTotal oneLineTotal) {
+        if (oneLineTotal == null) {
+            throw new IllegalArgumentException("Please enter a valid LineTotal object");
+        }
         // if no items were added to transaction yet, create a two dimensional array
         if (allItemsInTransaction == null) {
             allItemsInTransaction = new String[1][oneLineTotal.getLineTotalHeaders().length];
@@ -98,11 +102,8 @@ public class TransactionDataService {
                 for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < oneLineTotal.getLineTotalHeaders().length; numberOfColumnsInLineTotal++) {
                     allItemsInTransaction[numberOfItemsInCart + 1][numberOfColumnsInLineTotal] = oneLineTotal.getLineTotal()[numberOfColumnsInLineTotal];
                 }
-
             }
         }
-//        this.allItemsInTransaction = allItemsInTransaction;
-
     }
 
     public final double getSubtotal() {
@@ -141,15 +142,14 @@ public class TransactionDataService {
         this.totalDollarsSaved = getSubtotal() - getTotal();
     }
 
-    public String[] getLineHeaderInfo() {
+    public final String[] getLineHeaderInfo() {
         return oneLineTotal.getLineTotalHeaders();
     }
 
-    public TransactionDataService(PosRegister pos) {
+    public TransactionDataService(PosRegister pos, String customerID) {
         oneLineTotal = new LineTotal();
-        setCustomer(pos.getCustomer());
+        setCustomer(customerID, pos.getDatabase());
         setTransactionID(pos.getCurrentTransactionID());
         setStoreName(pos.getSTORENAME());
-        setCustomer(pos.getCustomer());
     }
 }

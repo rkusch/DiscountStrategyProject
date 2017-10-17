@@ -10,6 +10,7 @@ package discountstrategyproject;
  * @author rkusch
  */
 public class Customer {
+
     private String customerID;
     //would have liked to break this down into first and last name
     private String customerFullName;
@@ -19,7 +20,7 @@ public class Customer {
     }
 
     public final void setCustomerID(String customerID) {
-        if (customerID == null || customerID.length()==0) {
+        if (customerID == null || customerID.length() == 0) {
             throw new IllegalArgumentException("Please enter a valid customer ID");
         }
         this.customerID = customerID;
@@ -30,6 +31,9 @@ public class Customer {
     }
 
     public final void setCustomerFullName(String customerFullName) {
+        if (customerFullName == null || customerFullName.length() == 0) {
+            throw new IllegalArgumentException("Please enter a valid customer name");
+        }
         this.customerFullName = customerFullName;
     }
 
@@ -37,8 +41,5 @@ public class Customer {
         setCustomerID(customerID);
         setCustomerFullName(customerFullName);
     }
-   
-    
-    
-    
+
 }

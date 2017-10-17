@@ -17,7 +17,7 @@ public class Startup {
 //        register.addItemToSale("A101", 1);
         register.addItemToSale("A101", 3);
         register.addItemToSale("B205", 4);
-        register.addItemToSale("A101", 1);
+        register.addItemToSale("A101", 110);
         register.endSale();
         register.startSale("200");
 //        register.addItemToSale("A101", 1);
@@ -28,13 +28,13 @@ public class Startup {
         register.startSale("100");
 //        register.addItemToSale("A101", 1);
         register.addItemToSale("A101", 3);
-        register.addItemToSale("B205", 4);
+        register.addItemToSale("B205", 45);
         register.addItemToSale("A101", 1);
         register.endSale();
         register.startSale("300");
 //        register.addItemToSale("A101", 1);
-        register.addItemToSale("A101", 3);
-        register.addItemToSale("B205", 4);
+        register.addItemToSale("A101", 1);
+        register.addItemToSale("B205", 2);
         register.addItemToSale("A101", 1);
         register.endSale();
 
