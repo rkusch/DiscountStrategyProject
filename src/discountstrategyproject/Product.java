@@ -36,7 +36,7 @@ public class Product {
         return productName;
     }
 
-    public final void setProductName(String productName) {
+    public final void setProductName(String productName) throws IllegalArgumentException {
         if (productName == null || productName.length() == 0) {
             throw new IllegalArgumentException("Please enter a valid Product Name");
         }
