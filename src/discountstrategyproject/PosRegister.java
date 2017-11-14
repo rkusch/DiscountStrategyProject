@@ -47,6 +47,7 @@ public class PosRegister {
     ;
     public final void endSale() {
         receipt.outputEntireTransaction();
+
     };
 
     public final Integer getCurrentTransactionID() {

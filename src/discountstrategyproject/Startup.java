@@ -15,7 +15,7 @@ public class Startup {
         PosRegister register = new PosRegister(new InMemoryDatabase());
         register.startSale("100");
 //        register.addItemToSale("A101", 1);
-        register.addItemToSale("A101", 3);
+        register.addItemToSale("B205", 3);
         register.addItemToSale("B205", 4);
         register.addItemToSale("A101", 110);
         register.endSale();
@@ -27,7 +27,8 @@ public class Startup {
         register.endSale();
         register.startSale("100");
 //        register.addItemToSale("A101", 1);
-        register.addItemToSale("A101", 3);
+        register.addItemToSale("A101", 4);
+        register.addItemToSale("B205", 45);
         register.addItemToSale("B205", 45);
         register.addItemToSale("A101", 1);
         register.endSale();

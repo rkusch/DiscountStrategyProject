@@ -19,16 +19,17 @@ public class TransactionOuputToDisplay implements TransactionOutput {
 
     //this is set to private because only this class should call this method
     private final void outputFromOneDArrayBasedOnNumberOfHeaders() {
-        for (int numberOfHeaders = 0; numberOfHeaders < transactionData.getLineHeaderInfo().length; numberOfHeaders++) {
-            System.out.printf(TABSPACING, transactionData.getLineHeaderInfo()[numberOfHeaders]);
+        for (int numberOfHeaders = 0; numberOfHeaders < transactionData.getLineHeaderInfo().size(); numberOfHeaders++) {
+            System.out.printf(TABSPACING, transactionData.getLineHeaderInfo().get(numberOfHeaders));
         }
         System.out.print("\n");
     }
     //this is set to private because only this class should call this method
     private final void outputFromTwoDArrayBasedOnNumberOfHeaders() {
-        for (int numberOfItemsInCart = 0; numberOfItemsInCart < transactionData.getAllItemsInTransaction().length; numberOfItemsInCart++) {
-            for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < transactionData.getLineHeaderInfo().length; numberOfColumnsInLineTotal++) {
-                System.out.printf(TABSPACING, transactionData.getAllItemsInTransaction()[numberOfItemsInCart][numberOfColumnsInLineTotal]);
+        for (int numberOfItemsInCart = 0; numberOfItemsInCart < transactionData.getAllItemsInTransaction().size(); numberOfItemsInCart++) {
+            for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < transactionData.getLineHeaderInfo().size(); numberOfColumnsInLineTotal++) {
+                System.out.printf(TABSPACING, transactionData.getAllItemsInTransaction().get(numberOfItemsInCart).getLineTotal());
+//                        get(numberOfColumnsInLineTotal));
             }
             System.out.print("\n");
         };

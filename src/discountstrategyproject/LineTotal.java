@@ -6,6 +6,8 @@
 package discountstrategyproject;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,30 +15,28 @@ import java.text.NumberFormat;
  */
 public class LineTotal {
 
-    private String[] lineTotal;
-    private String[] lineTotalHeaders;
+    private List<String> lineTotal = new ArrayList<>();
+    private List<String> lineTotalHeaders = new ArrayList<>();
     private Product product;
 
-    public final String[] getLineTotal() {
+    public final List<String> getLineTotal() {
         return lineTotal;
     }
 
-    public final String[] getLineTotalHeaders() {
+    public final List<String>  getLineTotalHeaders() {
         return lineTotalHeaders;
     }
 
     //sets column names
     public final void setLineTotalHeaders() {
 
-        lineTotalHeaders = new String[]{
-            "Product Name",
-            "Price",
-            "Discount",
-            "Qty",
-            "Sale Price",
-            "Total Price"
-
-        };
+        lineTotalHeaders.add("Product Name");
+        lineTotalHeaders.add("Price");
+        lineTotalHeaders.add("Discount");
+        lineTotalHeaders.add("Qty");
+        lineTotalHeaders.add("Sale Price");
+        lineTotalHeaders.add("Total Price");
+       
     }
 
     ;
@@ -51,13 +51,12 @@ public class LineTotal {
             throw new IllegalArgumentException("Please input a valid quantity");
         }
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        lineTotal = new String[getLineTotalHeaders().length];
-        lineTotal[0] = product.getProductName();
-        lineTotal[1] = formatter.format(product.getProductUnitPrice());
-        lineTotal[2] = formatter.format(product.getDiscount().getDiscountAmount(qty, product));
-        lineTotal[3] = Integer.toString(qty);
-        lineTotal[4] = formatter.format(product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product));
-        lineTotal[5] = formatter.format((product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product)) * qty);
+        lineTotal.add(product.getProductName());
+        lineTotal.add(formatter.format(product.getProductUnitPrice()));
+        lineTotal.add(formatter.format(product.getDiscount().getDiscountAmount(qty, product)));
+        lineTotal.add(Integer.toString(qty));
+        lineTotal.add(formatter.format(product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product)));
+        lineTotal.add(formatter.format((product.getProductUnitPrice() - product.getDiscount().getDiscountAmount(qty, product)) * qty));
 
     };
   

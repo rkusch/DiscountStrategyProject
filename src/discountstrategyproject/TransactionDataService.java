@@ -6,6 +6,8 @@
 package discountstrategyproject;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,7 +16,7 @@ import java.text.DecimalFormat;
 public class TransactionDataService {
 
     private LineTotal oneLineTotal;
-    private String[][] allItemsInTransaction;
+    private List<LineTotal> allItemsInTransaction = new ArrayList<>();
     private Customer customer;
     private Integer transactionID;
     private String storeName;
@@ -75,7 +77,7 @@ public class TransactionDataService {
         this.transactionID = transactionID;
     }
 
-    public final String[][] getAllItemsInTransaction() {
+    public final List<LineTotal> getAllItemsInTransaction() {
         return allItemsInTransaction;
     }
 
@@ -83,27 +85,29 @@ public class TransactionDataService {
         if (oneLineTotal == null) {
             throw new IllegalArgumentException("Please enter a valid LineTotal object");
         }
-        // if no items were added to transaction yet, create a two dimensional array
-        if (allItemsInTransaction == null) {
-            allItemsInTransaction = new String[1][oneLineTotal.getLineTotalHeaders().length];
-            for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < oneLineTotal.getLineTotalHeaders().length; numberOfColumnsInLineTotal++) {
-                allItemsInTransaction[0][numberOfColumnsInLineTotal] = oneLineTotal.getLineTotal()[numberOfColumnsInLineTotal];
-            }
-            // else if one or multiple items were added to transaction, copy the current transaction array
-            // to a new array, and then add the new item to that new array
-        } else {
-            String[][] currentItemsInTransaction = allItemsInTransaction;
-            allItemsInTransaction = new String[currentItemsInTransaction.length + 1][oneLineTotal.getLineTotalHeaders().length];
-            for (int numberOfItemsInCart = 0; numberOfItemsInCart < currentItemsInTransaction.length; numberOfItemsInCart++) {
-                for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < oneLineTotal.getLineTotalHeaders().length; numberOfColumnsInLineTotal++) {
-                    allItemsInTransaction[numberOfItemsInCart][numberOfColumnsInLineTotal] = currentItemsInTransaction[numberOfItemsInCart][numberOfColumnsInLineTotal];
-                }
-                //"adds" newly added item into array
-                for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < oneLineTotal.getLineTotalHeaders().length; numberOfColumnsInLineTotal++) {
-                    allItemsInTransaction[numberOfItemsInCart + 1][numberOfColumnsInLineTotal] = oneLineTotal.getLineTotal()[numberOfColumnsInLineTotal];
-                }
-            }
-        }
+//        // if no items were added to transaction yet, create a two dimensional array
+//        if (allItemsInTransaction == null) {
+//            allItemsInTransaction = new String[1][oneLineTotal.getLineTotalHeaders().length];
+//            for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < oneLineTotal.getLineTotalHeaders().length; numberOfColumnsInLineTotal++) {
+//                allItemsInTransaction[0][numberOfColumnsInLineTotal] = oneLineTotal.getLineTotal()[numberOfColumnsInLineTotal];
+//            }
+//            // else if one or multiple items were added to transaction, copy the current transaction array
+//            // to a new array, and then add the new item to that new array
+//        } else {
+//            String[][] currentItemsInTransaction = allItemsInTransaction;
+//            allItemsInTransaction = new String[currentItemsInTransaction.length + 1][oneLineTotal.getLineTotalHeaders().length];
+//            for (int numberOfItemsInCart = 0; numberOfItemsInCart < currentItemsInTransaction.length; numberOfItemsInCart++) {
+//                for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < oneLineTotal.getLineTotalHeaders().length; numberOfColumnsInLineTotal++) {
+//                    allItemsInTransaction[numberOfItemsInCart][numberOfColumnsInLineTotal] = currentItemsInTransaction[numberOfItemsInCart][numberOfColumnsInLineTotal];
+//                }
+//                //"adds" newly added item into array
+//                for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < oneLineTotal.getLineTotalHeaders().length; numberOfColumnsInLineTotal++) {
+//                    allItemsInTransaction[numberOfItemsInCart + 1][numberOfColumnsInLineTotal] = oneLineTotal.getLineTotal()[numberOfColumnsInLineTotal];
+//                }
+//            }
+//        }
+                
+            allItemsInTransaction.add(oneLineTotal);
     }
 
     public final double getSubtotal() {
@@ -113,9 +117,9 @@ public class TransactionDataService {
 
     public final void setSubtotal() {
         double subtotal = 0;
-        for (int allItems = 0; allItems < allItemsInTransaction.length; allItems++) {
-            String strippedNumber = allItemsInTransaction[allItems][1].replaceAll("[^\\d.]+", "");
-            subtotal = subtotal + (Double.parseDouble(strippedNumber) * Double.parseDouble(allItemsInTransaction[allItems][3]));
+        for (int allItems = 0; allItems < allItemsInTransaction.size(); allItems++) {
+            String strippedNumber = allItemsInTransaction.get(allItems).getLineTotal().get(5).replaceAll("[^\\d.]+", "");
+            subtotal = subtotal + (Double.parseDouble(strippedNumber) * Double.parseDouble(allItemsInTransaction.get(allItems).getLineTotal().get(3)));
         };
         this.subtotal = subtotal;
     }
@@ -126,8 +130,8 @@ public class TransactionDataService {
 
     public final void setTotal() {
         double total = 0;
-        for (int allItems = 0; allItems < allItemsInTransaction.length; allItems++) {
-            String strippedNumber = allItemsInTransaction[allItems][5].replaceAll("[^\\d.]+", "");
+        for (int allItems = 0; allItems < allItemsInTransaction.size(); allItems++) {
+            String strippedNumber = allItemsInTransaction.get(allItems).getLineTotal().get(5).replaceAll("[^\\d.]+", "");
             total = total + Double.parseDouble(strippedNumber);
         };
         this.total = total;
@@ -142,7 +146,7 @@ public class TransactionDataService {
         this.totalDollarsSaved = getSubtotal() - getTotal();
     }
 
-    public final String[] getLineHeaderInfo() {
+    public final List<String> getLineHeaderInfo() {
         return oneLineTotal.getLineTotalHeaders();
     }
 
