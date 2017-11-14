@@ -16,7 +16,7 @@ import java.util.List;
 public class TransactionDataService {
 
     private LineTotal oneLineTotal;
-    private List<LineTotal> allItemsInTransaction = new ArrayList<>();
+    private List<LineTotal> allItemsInTransaction;
     private Customer customer;
     private Integer transactionID;
     private String storeName;
@@ -47,8 +47,10 @@ public class TransactionDataService {
         if (qty <= 0) {
             throw new IllegalArgumentException("Please input a valid quantity");
         }
-        oneLineTotal.setLineTotal(product, qty, database);
-        setAllItemsInTransaction(oneLineTotal);
+        LineTotal currentLineTotal = new LineTotal();
+        currentLineTotal.setLineTotal(product, qty, database);
+
+        setAllItemsInTransaction(currentLineTotal);
         setTotal();
         setSubtotal();
         setTotalDollarsSaved();
@@ -152,6 +154,7 @@ public class TransactionDataService {
 
     public TransactionDataService(PosRegister pos, String customerID) {
         oneLineTotal = new LineTotal();
+        allItemsInTransaction = new ArrayList<>();
         setCustomer(customerID, pos.getDatabase());
         setTransactionID(pos.getCurrentTransactionID());
         setStoreName(pos.getSTORENAME());

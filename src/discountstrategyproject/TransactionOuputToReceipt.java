@@ -14,14 +14,14 @@ public class TransactionOuputToReceipt implements TransactionOutput {
     private TransactionDataService transactionData;
 
     //this is set to private because only this class should call this method
-    private final void outputFromOneDArrayBasedOnNumberOfHeaders() {
+    private final void outputFromOneDListBasedOnNumberOfHeaders() {
         for (int numberOfHeaders = 0; numberOfHeaders < transactionData.getLineHeaderInfo().size(); numberOfHeaders++) {
             System.out.printf(TABSPACING, transactionData.getLineHeaderInfo().get(numberOfHeaders));
         }
         System.out.print("\n");
     }
     //this is set to private because only this class should call this method
-    private final void outputFromTwoDArrayBasedOnNumberOfHeaders() {
+    private final void outputFromTwoDListBasedOnNumberOfHeaders() {
         for (int numberOfItemsInCart = 0; numberOfItemsInCart < transactionData.getAllItemsInTransaction().size(); numberOfItemsInCart++) {
             for (int numberOfColumnsInLineTotal = 0; numberOfColumnsInLineTotal < transactionData.getLineHeaderInfo().size(); numberOfColumnsInLineTotal++) {
                 System.out.printf(TABSPACING, transactionData.getAllItemsInTransaction().get(numberOfItemsInCart).getLineTotal().get(numberOfColumnsInLineTotal));
@@ -35,9 +35,9 @@ public class TransactionOuputToReceipt implements TransactionOutput {
     public final void outputEntireTransaction() {
         System.out.println("Welcome to " + transactionData.getStoreName());
         System.out.println("----------------------------------------------------------------------------------------------------------------------------");
-        outputFromOneDArrayBasedOnNumberOfHeaders();
+        outputFromOneDListBasedOnNumberOfHeaders();
         System.out.print("\n");
-        outputFromTwoDArrayBasedOnNumberOfHeaders();
+        outputFromTwoDListBasedOnNumberOfHeaders();
         System.out.println("----------------------------------------------------------------------------------------------------------------------------");
         System.out.printf(TABSPACING, "Sub-total:");
         System.out.print("$" + transactionData.getSubtotal());
